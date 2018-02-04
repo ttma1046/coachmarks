@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoachmarksDialogComponent implements OnInit {
   @Input() message: string;
+  @Input() hasNext: boolean;
+
   constructor() { }
 
   ngOnInit() {
@@ -14,5 +16,9 @@ export class CoachmarksDialogComponent implements OnInit {
 
   fireCoachmarkClose() {
 
+  }
+
+  getButtonText() {
+    return this.hasNext ? 'Next' : 'Done';
   }
 }

@@ -63,5 +63,14 @@ describe('CoachmarksDialogComponent', () => {
 
 	expect(messageSpanEl.textContent).toBe(message);
 	});
+
+	it('should set the button text to \'Done\' if hasNext input is false', () => {
+	const buttonDe = fixture.debugElement.query(By.css('#coachmarks > body'));
+	const buttonEl = buttonDe.nativeElement;
+
+	fixture.detectChanges();
+
+	expect(buttonEl.textContent).toBe('Done');
+	});
     });
 });
