@@ -53,4 +53,15 @@ describe('CoachmarksDialogComponent', () => {
       expect(messageSpanEl.textContent).toEqual('');
     });
   })
+  describe('On load - With dependencies', () => {     it('Should set the message span element to the message passed into the component', () => {
+        const message = 'This is a message';
+	const messageSpanDe = fixture.debugElement.query(By.css('#coachmark-body > span'));
+	const messageSpanEl = messageSpanDe.nativeElement;
+
+	component.message = message;
+	fixture.detectChanges();
+
+	expect(messageSpanEl.textContent).toBe(message);
+	});
+    });
 });

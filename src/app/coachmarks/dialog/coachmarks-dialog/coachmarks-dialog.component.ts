@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coachmarks-dialog.component.scss']
 })
 export class CoachmarksDialogComponent implements OnInit {
-
+  @Input() message: string;
   constructor() { }
 
   ngOnInit() {
