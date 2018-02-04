@@ -8,9 +8,9 @@ describe('CoachmarksDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoachmarksDialogComponent ]
+      declarations: [CoachmarksDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -37,7 +37,7 @@ describe('CoachmarksDialogComponent', () => {
 
     it('should set label to point to checkbox', () => {
       const labelDe = fixture.debugElement.query(By.css('footer > label'));
-      
+
       expect(labelDe.attributes.for).toEqual('coachmark-do-not-show');
     });
 
@@ -52,25 +52,27 @@ describe('CoachmarksDialogComponent', () => {
       const messageSpanEl = messageSpanDe.nativeElement;
       expect(messageSpanEl.textContent).toEqual('');
     });
-  })
-  describe('On load - With dependencies', () => {     it('Should set the message span element to the message passed into the component', () => {
-        const message = 'This is a message';
-	const messageSpanDe = fixture.debugElement.query(By.css('#coachmark-body > span'));
-	const messageSpanEl = messageSpanDe.nativeElement;
+  });
 
-	component.message = message;
-	fixture.detectChanges();
+  describe('On load - With dependencies', () => {
+    it('Should set the message span element to the message passed into the component', () => {
+      const message = 'This is a message';
+      const messageSpanDe = fixture.debugElement.query(By.css('#coachmark-body > span'));
+      const messageSpanEl = messageSpanDe.nativeElement;
 
-	expect(messageSpanEl.textContent).toBe(message);
-	});
+      component.message = message;
+      fixture.detectChanges();
 
-	it('should set the button text to \'Done\' if hasNext input is false', () => {
-	const buttonDe = fixture.debugElement.query(By.css('#coachmarks > body'));
-	const buttonEl = buttonDe.nativeElement;
-
-	fixture.detectChanges();
-
-	expect(buttonEl.textContent).toBe('Done');
-	});
+      expect(messageSpanEl.textContent).toBe(message);
     });
+
+    it('should set the button text to \'Done\' if hasNext input is false', () => {
+      const buttonDe = fixture.debugElement.query(By.css('#coachmark-body > button'));
+      const buttonEl = buttonDe.nativeElement;
+
+      fixture.detectChanges();
+
+      expect(buttonEl.textContent).toBe('Done');
+    });
+  });
 });
