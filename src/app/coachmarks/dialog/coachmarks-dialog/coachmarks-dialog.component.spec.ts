@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CoachmarksDialogComponent } from './coachmarks-dialog.component';
+import { CoachmarksDirection } from '../core/coachmarks-direction.enum';
 
 describe('CoachmarksDialogComponent', () => {
   let component: CoachmarksDialogComponent;
@@ -67,12 +68,84 @@ describe('CoachmarksDialogComponent', () => {
     });
 
     it('should set the button text to \'Done\' if hasNext input is false', () => {
+      const hasNext = false;
       const buttonDe = fixture.debugElement.query(By.css('#coachmark-body > button'));
       const buttonEl = buttonDe.nativeElement;
 
+      component.hasNext = hasNext;
       fixture.detectChanges();
 
       expect(buttonEl.textContent).toBe('Done');
     });
   });
+
+  describe('Class Settings', () => {
+    it(`should set no class to the main section of the componenet
+      when the coachmark direction is not specified`, () => {
+        const coachmarkSectionDe = fixture.debugElement.query(By.css('section'));
+        expect(coachmarkSectionDe.classes['right-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['left-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['top-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['bottom-position']).toBeFalsy();
+      });
+
+    it(`should set the \'right-position\' class to the section
+      element when the coachmark direction is specfied on the right`, () => {
+        component.direction = CoachmarksDirection.Right;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const coachmarkSectionDe = fixture.debugElement.query(By.css('section'));
+
+
+        expect(coachmarkSectionDe.classes['right-position']).toBeTruthy();
+        expect(coachmarkSectionDe.classes['left-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['top-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['bottom-position']).toBeFalsy();
+      });
+
+    it(`should set the \'left-position\' class to the section
+      element when the coachmark direction is specfied on the left`, () => {
+        component.direction = CoachmarksDirection.Left;
+        component.ngOnInit();
+
+        const coachmarkSectionDe = fixture.debugElement.query(By.css('section'));
+
+        expect(coachmarkSectionDe.classes['right-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['left-position']).toBeTruthy();
+        expect(coachmarkSectionDe.classes['top-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['bottom-position']).toBeFalsy();
+      });
+
+    it(`should set the \'top-position\' class to the section
+      element when the coachmark direction is specfied on the top`, () => {
+        component.direction = CoachmarksDirection.Top;
+        component.ngOnInit();
+
+        const coachmarkSectionDe = fixture.debugElement.query(By.css('section'));
+
+        expect(coachmarkSectionDe.classes['right-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['left-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['top-position']).toBeTruthy();
+        expect(coachmarkSectionDe.classes['bottom-position']).toBeFalsy();
+      });
+
+    it(`should set the \'bottom-position\' class to the section
+      element when the coachmark direction is specfied on the bottom`, () => {
+        component.direction = CoachmarksDirection.Bottom;
+        component.ngOnInit();
+
+        const coachmarkSectionDe = fixture.debugElement.query(By.css('section'));
+
+        expect(coachmarkSectionDe.classes['right-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['left-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['top-position']).toBeFalsy();
+        expect(coachmarkSectionDe.classes['bottom-position']).toBeTruthy();
+      });
+  });
+  /*
+  describe('Absolute Positioning - Left and Top', () => {
+    it('should set the position currectly when showing it on the right and target is actually shorter')
+  });
+  */
 });
